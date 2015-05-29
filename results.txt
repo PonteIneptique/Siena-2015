@@ -1,0 +1,44 @@
+Result for letum
+Topic 0: circos forma facio artus1-N-P---MA- reor consanguineus lux
+Topic 1: circos forma facio artus1-N-P---MA- reor consanguineus lux
+Topic 2: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 3: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 4: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 5: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 6: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 7: circos forma facio artus1-N-P---MA- reor consanguineus lux
+Topic 8: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 9: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 10: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 11: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 12: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 13: circos forma facio artus1-N-P---MA- reor consanguineus lux
+Topic 14: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 15: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 16: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 17: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 18: forma rumpo artus1-N-P---MA- reor consanguineus lux sub
+Topic 19: circos forma facio artus1-N-P---MA- reor consanguineus lux
+
+Result for mors
+Topic 0: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 1: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 2: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 3: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 4: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 5: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 6: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 7: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 8: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 9: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 10: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 11: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 12: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 13: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 14: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 15: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 16: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 17: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 18: aether deus-N-P---MG- tandem civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+Topic 19: deus-N-P---MG- sedes pertaedet civis artus1-N-P---MA- saltus1 condicio-N-S---FN-
+
