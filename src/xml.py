@@ -24,7 +24,7 @@ class Verse(Parser):
   def parse(self):
     """ Parse the file """
     data = self.xml.xpath("//l")
-    self.data = [line.text for line in data]
+    self.data = [line.text for line in data if line.text is not None]
     return self.data
 
 
