@@ -11,7 +11,7 @@ RawText = Parse("./resources/normalized.virgil.perseus.xml", Verse)
 # We lemmatize the text then
 LemmSet = Lemmatize(RawText, LatinCLTK)
 # Now we search for occurences
-ResultSet = (Search(LemmSet, ["mors", "letum"], windowMaker(10))).process()
+ResultSet = (Search(LemmSet, ["mors", "letum", "morior"], windowMaker(500))).process()
 # We want to weight our ResultSet to take into account the distance
 ResultSetWeighted = Level(ResultSet, DistanceBalance)
 # Now, we compute what we want to compute !

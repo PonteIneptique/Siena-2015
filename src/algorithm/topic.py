@@ -14,8 +14,10 @@ class LDA(Algorithm):
     row = row[1]
     for tup in row:
       output.append(tup[1])
+      """
       if tup[2]:
         output.append(tup[1]+"-"+tup[2])
+      """
     ids = [id]*len(output)
     return list(zip(output, ids))
 
@@ -35,14 +37,13 @@ class LDA(Algorithm):
     wordsDict = {}
     for i, w in enumerate(ws):
       wordsDict[w] = i
-
     words = [wordsDict[word] for word in words]
 
     return words, documents, ws
 
 
   def subprocess(self, key):
-    model = PyLDA(n_topics=20, n_iter=2000)
+    model = PyLDA(n_topics=20, n_iter=20000)
     words, documents, wordsDict = self.normalize(key)
 
     matrix = lists_to_matrix(words, documents)
@@ -58,7 +59,7 @@ class LDA(Algorithm):
       model, documents, vocab = resources
       output.append("Result for {0}".format(key))
       topic_word = model.topic_word_  # model.components_ also works
-      n_top_words = 8
+      n_top_words = 20
       for i, topic_dist in enumerate(topic_word):
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-n_top_words:-1]
         output.append('Topic {}: {}'.format(i, ' '.join(topic_words)))
