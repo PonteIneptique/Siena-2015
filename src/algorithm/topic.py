@@ -37,15 +37,16 @@ class LDA(Algorithm):
     wordsDict = {}
     for i, w in enumerate(ws):
       wordsDict[w] = i
-    words = [wordsDict[word] for word in words]
-
+    # words = [[wordsDict[word] for word in tup[1]] for tup in normalized]
+    words = [[wordsDict[tup[0]] for tup in sentence] for sentence in normalized]
+    documents = [docId for docId, value in enumerate(data)]
+    print(words)
     return words, documents, ws
 
 
   def subprocess(self, key):
-    model = PyLDA(n_topics=20, n_iter=20000)
+    model = PyLDA(n_topics=20, n_iter=1)
     words, documents, wordsDict = self.normalize(key)
-
     matrix = lists_to_matrix(words, documents)
     model.fit_transform(matrix)
     return (model, documents, wordsDict)
