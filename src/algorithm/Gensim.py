@@ -20,6 +20,13 @@ class LSI(GensimAlgorythm):
     GensimAlgorythm.__init__(self, data)
     self.method = gensim.models.LsiModel
 
+
+class LDA(GensimAlgorythm):
+  def __init__(self, data):
+    GensimAlgorythm.__init__(self, data)
+    self.method = gensim.models.LdaMulticore
+
+
 def tfidf(GO):
   """ GO @GensimObject """
   tfidf = gensim.models.TfidfModel(GO.corpus)

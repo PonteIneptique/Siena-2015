@@ -63,12 +63,45 @@ class Graph(GensimExporter):
       topic = [t[1] for t in rows[i]]
       for word in query:
         z = topic.index(word)
-        edges.append(Edge(source=word, target=i, weight=rows[i][z][0]))
+        edges.append(Edge(source="q-"+word, target=i, weight=rows[i][z][0]))
 
     for i in range(n_topics):
       topic = rows[i][0:n_words]
       for word in topic:
-        edges.append(Edge(source="q-"+word[1], target=i, weight=word[0]))
+        edges.append(Edge(source=word[1], target=i, weight=word[0]))
+        if word[1] not in treated:
+          nodes.append(Node(id=word[1], text=word[1], type="lemma"))
+
+    with open(fname.format("nodes"), "w") as f:
+      f.write("\n".join([";".join([str(e) for e in list(node)]) for node in nodes]))
+      f.close()
+
+    with open(fname.format("edges"), "w") as f:
+      f.write("\n".join([";".join([str(e) for e in list(edge)]) for edge in edges]))
+      f.close()
+
+class Text(GensimExporter):   
+  def export(self, query, n_topics, n_words, force=True, fname="PCAExport"):
+    """ Force : force an edge between query words and topic words """
+    nodes = [Node("id", "label", "type")]
+    edges = [Word("source", "target", "weight")]
+    treated = []
+    for q in query:
+      nodes.append(Node("q-"+q, q, "query"))
+
+    rows = [self.model.show_topic(i, len(self.dictionary.keys())) for i in range(n_topics)]
+    nodes = nodes + [Node(id=i, text="Topic " + str(i+1), type="topic") for i in range(n_topics)]
+
+    for i in range(n_topics):
+      topic = [t[1] for t in rows[i]]
+      for word in query:
+        z = topic.index(word)
+        edges.append(Edge(source="q-"+word, target=i, weight=rows[i][z][0]))
+
+    for i in range(n_topics):
+      topic = rows[i][0:n_words]
+      for word in topic:
+        edges.append(Edge(source=word[1], target=i, weight=word[0]))
         if word[1] not in treated:
           nodes.append(Node(id=word[1], text=word[1], type="lemma"))
 

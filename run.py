@@ -24,14 +24,13 @@ G = GensimAdapter(ResultSet)
 
 tfidf = Gensim.tfidf(G.GensimObject)
 
-lsi = Gensim.LSI(tfidf)
+lsi = Gensim.LDA(tfidf)
 lsi.process(num_topics=50)
 d = lsi.model.print_topics(50)
 
 exports = {}
 exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
-exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-{0}.csv")
-"""
+exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-LDA-{0}.csv")
+
 exports["PCA"] = PCA(lsi.model, tfidf.dictionary)
-exports["PCA"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=500, title="PCA Topics of Aeneid Death")
-"""
+exports["PCA"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=500, title="PCA Topics of Aeneid Death", fname="LDA")
