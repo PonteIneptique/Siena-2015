@@ -44,13 +44,13 @@ class PCA(GensimExporter):
      
     pyplot.close()
      
-Node = namedtuple("Node", ["id", "label", "type"])
+Node = namedtuple("Node", ["id", "text", "type"])
 Edge = namedtuple("Edge", ["source", "target", "weight"])
 
 class Graph(GensimExporter):   
   def export(self, query, n_topics, n_words, force=True, fname="PCAExport"):
     """ Force : force an edge between query words and topic words """
-    nodes = [Node("id", "text", "type")]
+    nodes = [Node("id", "label", "type")]
     edges = [Edge("source", "target", "weight")]
     treated = []
     for q in query:
