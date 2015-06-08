@@ -10,12 +10,12 @@ from ..texts import Citation, Word
 
 
 class Lemmatizer(object):
-  def __init__(self, text):
+  def __init__(self, text, **kwargs):
     self.data = defaultdict(list)
     self.refs = []
 
     if self.normalize:
-      self.text = self.normalize(text)
+      self.text = self.normalize(text, **kwargs)
     else:
       self.text = self._normalize(text)
 
@@ -41,7 +41,7 @@ class Lemmatizer(object):
 class LatinCLTK(Lemmatizer):
   """ Lemmatizer using the CLTK Latin Lemmatizer """
 
-  def normalize(self, text):
+  def normalize(self, text, stopwords):
     """ Normalize the text """
     jv = JVReplacer()
     punkt = RegexpTokenizer(r'\w+')
@@ -51,23 +51,23 @@ class LatinCLTK(Lemmatizer):
       line = punkt.tokenize(jv.replace(citation.text.lower()))
       data = data + line
       self.refs = self.refs + [citation.ref] * len(line)
-    return " ".join(data)
 
-  def getLemma(self, stopwords=False):
-    lemmatizer = LemmaReplacer('latin')
-    if not stopwords:
-      return lemmatizer.lemmatize(self.text)
+    if stopwords:
+      return " ".join([lem for lem in data if lem not in STOPS_LIST_LATIN])
     else:
-      lemma = lemmatizer.lemmatize(self.text)
-      return [lem for lem in lemma if lem not in STOPS_LIST_LATIN]
+      return " ".join(data)
+
+  def getLemma(self):
+    lemmatizer = LemmaReplacer('latin')
+    return lemmatizer.lemmatize(self.text)
 
 
   def getPos(self):
     tagger = POSTag('latin')
     return tagger.tag_unigram(self.text)
 
-  def parse(self, stopwords=False):
-    lemmaList = self.getLemma(stopwords=stopwords)
+  def parse(self):
+    lemmaList = self.getLemma()
     posList = self.getPos()
     self.data = [self.format(word=posList[i][0], lemma=lemmaList[i], pos=posList[i][1], ref=self.refs[i]) for i in range(0, len(lemmaList))]
     return self.data

@@ -11,7 +11,7 @@ def Lemmatize(text, lemmatizer, cachePath=None, **kwargs):
   cache = Cache(path)
   if cache.exists():
     return cache.read()
-  process = lemmatizer(text)
-  process.parse(**kwargs)
+  process = lemmatizer(text, **kwargs)
+  process.parse()
   cache.write(process.data)
   return cache.read()

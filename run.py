@@ -9,6 +9,8 @@ from src.compute import Compute
 
 from src.algorithm.adapter import GensimAdapter
 from src.algorithm import Gensim
+from src.exporters.Gensim import PCA, Graph
+
 #We need to install data, don't forget to run "install.py"
 
 # We first need to process the XML resource
@@ -20,17 +22,16 @@ ResultSet = (Search(LemmSet, ["mors", "letum", "morior"], windowMaker(500))).pro
 
 G = GensimAdapter(ResultSet)
 
-Gensim.tfidf(G.GensimObject)
+tfidf = Gensim.tfidf(G.GensimObject)
 
-lsi = Gensim.LSI(G.GensimObject)
-lsi.process(num_topics=200)
+lsi = Gensim.LSI(tfidf)
+lsi.process(num_topics=50)
 d = lsi.model.print_topics(50)
-print("\n".join(d))
+
+exports = {}
+exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
+exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-{0}.csv")
 """
-# We want to weight our ResultSet to take into account the distance
-ResultSetWeighted = Level(ResultSet, DistanceBalance)
-ResultSetWeighteds.toString()
-# Now, we compute what we want to compute !
-# You said topic modeling ?
-C = Compute(ResultSet, LDA)
+exports["PCA"] = PCA(lsi.model, tfidf.dictionary)
+exports["PCA"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=500, title="PCA Topics of Aeneid Death")
 """
