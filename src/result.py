@@ -15,5 +15,5 @@ class ResultSet(object):
     s = []
     for key in self.data:
       for value in self.data[key]:
-        s.append("{0} : {1}".format(key, " ".join([v[1] for v in value])))
+        s.append("{0} [{2}-{3}]: {1}".format(key, " ".join([v[1] for v in value]), value[0][3], value[-1][3]))
     return "\n".join(s)
