@@ -3,8 +3,6 @@ from lda.lda import LDA as PyLDA
 from lda.utils import lists_to_matrix
 import numpy as np
 
-def flatten(l):
-  return [x for y in l for x in y]
 
 
 class LDA(Algorithm):

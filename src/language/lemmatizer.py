@@ -1,12 +1,12 @@
 from cltk.stem.lemma import LemmaReplacer
 from cltk.stem.latin.j_v import JVReplacer
 from cltk.tag.pos import POSTag
+from cltk.stop.latin.stops import STOPS_LIST as STOPS_LIST_LATIN
 from nltk.tokenize.punkt import PunktLanguageVars
 from nltk.tokenize import RegexpTokenizer
 from collections import defaultdict
 
-from .words import Word
-from ..texts import Citation
+from ..texts import Citation, Word
 
 
 class Lemmatizer(object):
@@ -53,16 +53,21 @@ class LatinCLTK(Lemmatizer):
       self.refs = self.refs + [citation.ref] * len(line)
     return " ".join(data)
 
-  def getLemma(self):
+  def getLemma(self, stopwords=False):
     lemmatizer = LemmaReplacer('latin')
-    return lemmatizer.lemmatize(self.text)
+    if not stopwords:
+      return lemmatizer.lemmatize(self.text)
+    else:
+      lemma = lemmatizer.lemmatize(self.text)
+      return [lem for lem in lemma if lem not in STOPS_LIST_LATIN]
+
 
   def getPos(self):
     tagger = POSTag('latin')
     return tagger.tag_unigram(self.text)
 
-  def parse(self):
-    lemmaList = self.getLemma()
+  def parse(self, stopwords=False):
+    lemmaList = self.getLemma(stopwords=stopwords)
     posList = self.getPos()
     self.data = [self.format(word=posList[i][0], lemma=lemmaList[i], pos=posList[i][1], ref=self.refs[i]) for i in range(0, len(lemmaList))]
     return self.data
