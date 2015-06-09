@@ -24,7 +24,7 @@ class LSI(GensimAlgorythm):
 class LDA(GensimAlgorythm):
   def __init__(self, data):
     GensimAlgorythm.__init__(self, data)
-    self.method = gensim.models.LdaMulticore
+    self.method = gensim.models.LdaModel
 
 
 def tfidf(GO):

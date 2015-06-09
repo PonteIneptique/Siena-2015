@@ -9,7 +9,7 @@ from src.compute import Compute
 
 from src.algorithm.adapter import GensimAdapter
 from src.algorithm import Gensim
-from src.exporters.Gensim import PCA, Graph
+from src.exporters.Gensim import PCA, Graph, TopWords
 
 #We need to install data, don't forget to run "install.py"
 
@@ -29,8 +29,12 @@ lsi.process(num_topics=50)
 d = lsi.model.print_topics(50)
 
 exports = {}
+exports["Text"] = TopWords(lsi.model, tfidf.dictionary)
+exports["Text"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="Text.md")
+"""
 exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
 exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-LDA-{0}.csv")
 
 exports["PCA"] = PCA(lsi.model, tfidf.dictionary)
 exports["PCA"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=500, title="PCA Topics of Aeneid Death", fname="LDA")
+"""
