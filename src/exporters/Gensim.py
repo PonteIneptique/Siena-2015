@@ -4,6 +4,7 @@ import matplotlib.pyplot as pyplot
 from collections import namedtuple
 from .helpers import Node, Edge, row
 
+from .writers import TextWriter, TopWordsWriter
 
 class GensimExporter(object):
   def __init__(self, model, dictionary):
@@ -103,42 +104,21 @@ class TopWords(GensimExporter):
         if word[1] not in words:
           words[word[1]] = Row(*list([word[1]] + [dic[n][word[1]] for n in range(n_topics)]))
     
-    data = legend + topics + [words[word] for word in words]
-
-    if markdown is True:
-      with open(fname, "w") as f:
-        f.write(
-          "\n".join(
-              [ " | ".join([str(e) for e in list(r)]) for r in data]
-            )
-        )
-        f.close()
+    # We send to the writer
+    TopWordsWriter(legend, [words[word] for word in words], topics, markdown, fname)
 
 
 class Text(GensimExporter):   
-  def export(self, query, n_topics, n_words, fname="TextExport.txt"):
+  def export(self, query=None, n_topics=10, n_words=20, fname="TextExport.txt"):
     """
       Should have a force parameter to register each word score for each topic 
     """
+    topics = list()
     # We need the top n_words words
     rows = [self.model.show_topic(i, n_words) for i in range(n_topics)]
     # We need a dict of all words for all topic
-    dic  = topics_to_vectorspace(self.model, n_topics, len(self.dictionary.keys()))
-    # Query
-    topics = [Row(*list([topic] + [dic[n][topic] for n in range(n_topics)])) for topic in query]
-    words = {}
-    for r in rows:
-      for word in r:
-        if word[1] not in words:
-          words[word[1]] = Row(*list([word[1]] + [dic[n][word[1]] for n in range(n_topics)]))
-    
-    data = legend + topics + [words[word] for word in words]
+    if query is not None:
+      dic  = topics_to_vectorspace(self.model, n_topics, len(self.dictionary.keys()))
+      topics = [list([topic] + [dic[n][topic] for n in range(n_topics)]) for topic in query]
 
-    if markdown is True:
-      with open(fname, "w") as f:
-        f.write(
-          "\n".join(
-              [ " | ".join([str(e) for e in list(r)]) for r in data]
-            )
-        )
-        f.close()
+    TextWriter(rows, topics, fname)

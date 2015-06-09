@@ -9,7 +9,7 @@ from src.compute import Compute
 
 from src.algorithm.adapter import GensimAdapter
 from src.algorithm import Gensim
-from src.exporters.Gensim import PCA, Graph, TopWords
+from src.exporters.Gensim import PCA, Graph, TopWords, Text
 
 #We need to install data, don't forget to run "install.py"
 
@@ -29,8 +29,11 @@ lsi.process(num_topics=50)
 d = lsi.model.print_topics(50)
 
 exports = {}
-exports["Text"] = TopWords(lsi.model, tfidf.dictionary)
-exports["Text"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="Text.md")
+exports["Text"] = Text(lsi.model, tfidf.dictionary)
+exports["Text"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="presentation/topics.txt")
+
+exports["TW"] = TopWords(lsi.model, tfidf.dictionary)
+exports["TW"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="presentation/Text.md")
 """
 exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
 exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-LDA-{0}.csv")
