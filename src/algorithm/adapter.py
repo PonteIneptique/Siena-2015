@@ -52,7 +52,6 @@ class GensimAdapter(object):
 
   def fname(self, method):
     fname = "/".join(["cache", hashlib.md5(".".join(self.references).encode('utf-8')).hexdigest() + "." + str(method)])
-    print(fname)
     return fname
 
   def serialize(self, method):

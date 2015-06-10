@@ -4,6 +4,7 @@ from cltk.tag.pos import POSTag
 from cltk.stop.latin.stops import STOPS_LIST as STOPS_LIST_LATIN
 from nltk.tokenize.punkt import PunktLanguageVars
 from nltk.tokenize import RegexpTokenizer
+from nltk.stem.snowball import FrenchStemmer
 from collections import defaultdict
 
 from ..texts import Citation, Word
@@ -71,3 +72,36 @@ class LatinCLTK(Lemmatizer):
     posList = self.getPos()
     self.data = [self.format(word=posList[i][0], lemma=lemmaList[i], pos=posList[i][1], ref=self.refs[i]) for i in range(0, len(lemmaList))]
     return self.data
+
+
+class FrenchNLTK(Lemmatizer):
+  """ Lemmatizer using the CLTK Latin Lemmatizer """
+
+  def normalize(self, text, stopwords):
+    """ Normalize the text """
+    jv = JVReplacer()
+    punkt = RegexpTokenizer(r'\w+')
+    data = []
+
+    for citation in text:
+      line = punkt.tokenize(jv.replace(citation.text.lower()))
+      data = data + line
+      self.refs = self.refs + [citation.ref] * len(line)
+    return data
+
+  def getLemma(self):
+    stemmer = FrenchStemmer(ignore_stopwords=True)
+    return [stemmer.stem(word) for word in self.text]
+
+
+  def getPos(self):
+    stemmer = FrenchStemmer(ignore_stopwords=True)
+    return [(word, "") for word in self.text]
+
+  def parse(self):
+    lemmaList = self.getLemma()
+    posList = self.getPos()
+    self.data = [self.format(word=posList[i][0], lemma=lemmaList[i], pos=posList[i][1], ref=self.refs[i]) for i in range(0, len(lemmaList)) if lemmaList[i] is not None]
+    return self.data
+
+    

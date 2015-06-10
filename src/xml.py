@@ -39,6 +39,25 @@ class Verse(Parser):
     self.data = [Citation(text=line.text, ref=self.cts(line)) for line in data if line.text is not None]
     return self.data
 
+class Content(Parser):
+  def read(self):
+    """ Read the file and put it in the object """
+    with open(self.path, "r") as xml:
+      self.xml = etree.parse(xml)
+      xml.close()
+
+  def cts(self, line):
+    if line.get(""):
+      parent = line.getparent().get("n")
+      return ".".join([parent, line.get("n")])
+    return ""
+
+  def parse(self):
+    """ Parse the file """
+    data = self.xml.xpath("//content")    
+    self.data = [Citation(text=data[i].text, ref=str(i)) for i in range(len(data)) if data[i].text is not None]
+    return self.data
+
 def Parse(path, reader=Verse):
   """ Parse the XML lines of a Text"""
   cache = Cache(path)
