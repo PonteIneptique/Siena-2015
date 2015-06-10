@@ -44,13 +44,13 @@ exports["Json"] = TopWords(lsi.model, tfidf.dictionary)
 exports["Json"].export(query=[], n_topics=10, n_words=10, mode="json", fname="presentation/topics.json")
 
 exports["Text"] = Text(lsi.model, tfidf.dictionary)
-exports["Text"].export(query=[], n_topics=10, n_words=10, fname="presentation/topics.txt")
+exports["Text"].export(query=[], n_topics=10, n_words=20, fname="presentation/topics.txt")
 
 exports["TW"] = TopWords(lsi.model, tfidf.dictionary)
-exports["TW"].export(query=[], n_topics=10, n_words=10, mode="markdown", fname="presentation/Text.md")
+exports["TW"].export(query=[], n_topics=10, n_words=20, mode="markdown", fname="presentation/Text.md")
 
 exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
-exports["Graph"].export(query=[], n_topics=10, n_words=10, force=True, fname="graph-LDA-{0}.csv")
+exports["Graph"].export(query=[], n_topics=10, n_words=20, force=True, fname="graph-LDA-{0}.csv")
 """
 exports["PCA"] = PCA(lsi.model, tfidf.dictionary)
 exports["PCA"].export(query=[], n_topics=50, n_words=500, title="PCA Topics of Aeneid Death", fname="LDA")
