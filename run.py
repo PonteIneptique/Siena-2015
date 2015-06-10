@@ -29,11 +29,14 @@ lsi.process(num_topics=50)
 d = lsi.model.print_topics(50)
 
 exports = {}
+exports["Json"] = TopWords(lsi.model, tfidf.dictionary)
+exports["Json"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, mode="json", fname="presentation/topics.json")
+
 exports["Text"] = Text(lsi.model, tfidf.dictionary)
 exports["Text"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="presentation/topics.txt")
 
 exports["TW"] = TopWords(lsi.model, tfidf.dictionary)
-exports["TW"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, fname="presentation/Text.md")
+exports["TW"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, mode="markdown", fname="presentation/Text.md")
 """
 exports["Graph"] = Graph(lsi.model, tfidf.dictionary)
 exports["Graph"].export(query=["mors", "letum", "morior"], n_topics=50, n_words=20, force=True, fname="graph-LDA-{0}.csv")

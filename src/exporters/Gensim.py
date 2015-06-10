@@ -86,7 +86,7 @@ class Graph(GensimExporter):
       f.close()
 
 class TopWords(GensimExporter):   
-  def export(self, query, n_topics, n_words, markdown=True, fname="TopWords.txt"):
+  def export(self, query, n_topics, n_words, mode="markdown", fname="TopWords.txt"):
     """
       Should have a force parameter to register each word score for each topic 
     """
@@ -105,7 +105,7 @@ class TopWords(GensimExporter):
           words[word[1]] = Row(*list([word[1]] + [dic[n][word[1]] for n in range(n_topics)]))
     
     # We send to the writer
-    TopWordsWriter(legend, [words[word] for word in words], topics, markdown, fname)
+    TopWordsWriter(legend, [words[word] for word in words], topics, mode, fname)
 
 
 class Text(GensimExporter):   
